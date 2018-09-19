@@ -1,0 +1,69 @@
+package com.vriera.productivity.tasks;
+
+public class TaskBuilder {
+
+    private Integer petitionId;
+    private Integer employeeId;
+    private TaskType taskType;
+    private TaskSubType taskSubType;
+    private Integer estimated;
+    private Integer reported;
+
+    public TaskBuilder petitionId(Integer petitionId) {
+        this.petitionId = petitionId;
+        return this;
+    }
+
+    public TaskBuilder employeeId(Integer employeeId) {
+        this.employeeId = employeeId;
+        return this;
+    }
+
+    public TaskBuilder taskType(TaskType taskType) {
+        this.taskType = taskType;
+        return this;
+    }
+
+    public TaskBuilder taskSubType(TaskSubType taskSubType) {
+        this.taskSubType = taskSubType;
+        return this;
+    }
+
+    public TaskBuilder estimated(Integer estimated) {
+        this.estimated = estimated;
+        return this;
+    }
+    public TaskBuilder reported(Integer reported) {
+        this.reported = reported;
+        return this;
+    }
+
+    public Integer getPetitionId() {
+        return petitionId;
+    }
+
+    public Integer getEmployeeId() {
+        return employeeId;
+    }
+
+    public TaskType getTaskType() {
+        return taskType;
+    }
+
+    public TaskSubType getTaskSubType() {
+        return taskSubType;
+    }
+
+    public Integer getEstimated() {
+        return estimated;
+    }
+
+    public Integer getReported() {
+        return reported;
+    }
+
+    public Task build() {
+        return new Task(this);
+    }
+}
+
