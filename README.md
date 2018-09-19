@@ -21,4 +21,5 @@ docker exec -it container_id /bin/sh
 
 Versions
 ========
-1.0.0 - First stable release
+- 1.0.0
+-- First stable release
