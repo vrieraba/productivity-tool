@@ -10,7 +10,7 @@ docker run -v c:/Users/your_user/ProductivityToolData:/mnt/ProductivityToolData 
 docker run -v c:/Users/your_user/ProductivityToolData:/mnt/ProductivityToolData -e "JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=n" -p 8080:8080 -p 5005:5005 -t vriera/productivity-tool
 ```
 
-## Docker commands
+## Useful docker commands
 - Clean <none> images:
 ```
 docker rmi $(docker images -qa -f 'dangling=true')
