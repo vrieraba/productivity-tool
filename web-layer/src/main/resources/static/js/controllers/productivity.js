@@ -31,7 +31,7 @@ function printProductivityReport() {
 function printGlobalProductivityReport() {
     let dataEntries = [];
 
-    dataEntries.push(new ChartDataEntry("Coyotes", [teamProductivityReports[0].productivity]));
+    dataEntries.push(new ChartDataEntry("Team", [teamProductivityReports[0].productivity]));
 
     employeesProductivityReports.forEach(function(employeeReport) {
         dataEntries.push(new ChartDataEntry(employeeReport.employee.name, [employeeReport.productivity]));
@@ -54,7 +54,7 @@ function printMonthlyProductivityReport() {
     monthsWithData.forEach(function(month) {
         coyotesMonthlyProductivityValues.push(teamProductivityReports[0].productivityByMonth[month]);
     });
-    dataEntries.push(new ChartDataEntry("Coyotes", coyotesMonthlyProductivityValues));
+    dataEntries.push(new ChartDataEntry("Team", coyotesMonthlyProductivityValues));
 
     employeesProductivityReports.forEach(function(employeeReport) {
         let employeeMonthlyProductivityValues = [];
@@ -84,7 +84,7 @@ function printTaskSubTypeProductivityReport() {
         monthsWithData.forEach(function(month) {
             coyotesMonthlyProductivityValues.push(teamProductivityReports[0].productivityByMonthAndTaskSubType[taskSubType][month]);
         });
-        dataEntries.push(new ChartDataEntry("Coyotes", coyotesMonthlyProductivityValues));
+        dataEntries.push(new ChartDataEntry("Team", coyotesMonthlyProductivityValues));
 
         employeesProductivityReports.forEach(function(employeeReport) {
             let employeeMonthlyProductivityValues = [];

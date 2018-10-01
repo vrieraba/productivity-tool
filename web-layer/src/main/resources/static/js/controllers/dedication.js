@@ -34,7 +34,7 @@ function printGlobalDedicationReport() {
     taskSubTypes.forEach(function(taskSubType) {
         teamDedicationBySubTask.push(teamDedicationReports[0].dedicationByTaskSubType[taskSubType]);
     });
-    dataEntries.push(new ChartDataEntry("Coyotes", teamDedicationBySubTask));
+    dataEntries.push(new ChartDataEntry("Team", teamDedicationBySubTask));
 
     employeesDedicationReports.forEach(function(employeeReport) {
         let employeeDedicationBySubTask = [];
@@ -64,7 +64,7 @@ function printDedicationReportByMonthAndSubtask() {
         monthsWithData.forEach(function(month) {
             coyotesMonthlyDedicationValues.push(teamDedicationReports[0].dedicationByMonthAndTaskSubType[taskSubType][month]);
         });
-        dataEntries.push(new ChartDataEntry("Coyotes", coyotesMonthlyDedicationValues));
+        dataEntries.push(new ChartDataEntry("Team", coyotesMonthlyDedicationValues));
 
         employeesDedicationReports.forEach(function(employeeReport) {
             let employeeMonthlyDedicationValues = [];

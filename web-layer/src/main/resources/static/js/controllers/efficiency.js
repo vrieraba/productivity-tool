@@ -29,7 +29,7 @@ function printEfficiencyReport() {
 function printGlobalEfficiencyReport() {
     let dataEntries = [];
 
-    dataEntries.push(new ChartDataEntry("Coyotes", [teamEfficiencyReports[0].efficiency]));
+    dataEntries.push(new ChartDataEntry("Team", [teamEfficiencyReports[0].efficiency]));
 
     employeesEfficiencyReports.forEach(function(employeeReport) {
         dataEntries.push(new ChartDataEntry(employeeReport.employee.name, [employeeReport.efficiency]));
@@ -52,7 +52,7 @@ function printMonthlyEfficiencyReport() {
     monthsWithData.forEach(function(month) {
         coyotesMonthlyEfficiencyValues.push(teamEfficiencyReports[0].efficiencyByMonth[month]);
     });
-    dataEntries.push(new ChartDataEntry("Coyotes", coyotesMonthlyEfficiencyValues));
+    dataEntries.push(new ChartDataEntry("Team", coyotesMonthlyEfficiencyValues));
 
     employeesEfficiencyReports.forEach(function(employeeReport) {
         let employeeMonthlyEfficiencyValues = [];

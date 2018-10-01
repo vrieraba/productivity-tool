@@ -41,7 +41,7 @@ function printMonthlyLeadTimeReport() {
     monthsWithData.forEach(function(month) {
         coyotesMonthlyLeadTimesValues.push(teamLeadTimeReports[0].leadTimeByMonth[month]);
     });
-    dataEntries.push(new ChartDataEntry("Coyotes", coyotesMonthlyLeadTimesValues));
+    dataEntries.push(new ChartDataEntry("Team", coyotesMonthlyLeadTimesValues));
 
     employeesLeadTimeReports.forEach(function(employeeReport) {
         let employeeMonthlyLeadTimeValues = [];
@@ -71,7 +71,7 @@ function printLeadTimeReportByMonthAndTaskSubType() {
         monthsWithData.forEach(function(month) {
             coyotesMonthlyLeadTimeValues.push(teamLeadTimeReports[0].leadTimeByMonthAndTaskSubType[taskSubType][month]);
         });
-        dataEntries.push(new ChartDataEntry("Coyotes", coyotesMonthlyLeadTimeValues));
+        dataEntries.push(new ChartDataEntry("Team", coyotesMonthlyLeadTimeValues));
 
         employeesLeadTimeReports.forEach(function(employeeReport) {
             let employeeMonthlyLeadTimesValues = [];
