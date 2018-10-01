@@ -34,11 +34,10 @@ public class DataBaseUtils {
     public void loadDB() throws IOException {
         System.out.println("Loading DataBase...");
 
-        File folder = new File("/mnt/ProductivityToolData/");
-        for (File file : folder.listFiles()) {
-            if (file.getName().contains("EMPLEADOS")) {
-                uploadEmployeesFile(file.getName());
-            } else {
+        uploadEmployeesFile("EMPLEADOS.xlsx");
+
+        for (File file : new File("/mnt/ProductivityToolData/").listFiles()) {
+            if (file.getName().contains("PETICION_")) {
                 uploadPetitionFile(file.getName());
             }
         }
