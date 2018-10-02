@@ -1,6 +1,6 @@
 # Productivity Tool
 
-Productivity tool provides you interactive graphs and useful information, letting you easily follow and monitor the performance of your team.
+Productivity tool provides you with interactive graphs and useful information, letting you easily follow and monitor the performance of your team.
 
 ## Events
 
