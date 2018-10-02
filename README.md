@@ -1,4 +1,4 @@
-->![ProductivityTool](https://github.com/vrieraba/productivity-tool/blob/master/logo.PNG)<-
+![ProductivityTool](https://github.com/vrieraba/productivity-tool/blob/master/logo.PNG)
 
 Productivity tool provides you with interactive graphs and useful information, letting you easily follow and monitor the performance of your team.
 
