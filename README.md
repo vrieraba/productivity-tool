@@ -1,38 +1,29 @@
 # Productivity Tool
 
-## Run Project in docker
-- Only run
-```
-docker run -v c:/Users/your_user/ProductivityToolData:/mnt/ProductivityToolData -p 8080:8080 -t victor85/productivity-tool
-```
-- With debug
-```
-docker run -v c:/Users/your_user/ProductivityToolData:/mnt/ProductivityToolData -e "JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=n" -p 8080:8080 -p 5005:5005 -t victor85/productivity-tool
-```
+Productivity tool provides you interactive graphs and useful information, letting you easily follow and monitor the performance of your team.
 
-## Useful docker commands
-- Clean <none> images:
-```
-docker rmi $(docker images -qa -f 'dangling=true')
-```
-- Access container terminal
-```
-docker exec -it container_id /bin/sh
-```
-- Save docker image (as .tar)
-```
-docker save -o C:\Users\vrieraba\Desktop\productivity-tool-1.0.0.tar <image name>
-```
-- Load image in docker
-```
-docker load -i C:\Users\vrieraba\Desktop\productivity-tool-1.0.0.tar
-```
+## Events
+
+| Date  | Event |
+| - | - |
+| 19 September 2018 | First beta launched 1.0.0 |
+| 26 September 2018 | B2B team started the kick off |
+
+## Features
+
+Productivity Tool has the following features:
+
+* Dedication graphs
+* Productivity graphs
+* Efficiency graphs
+* Lead Time graphs
+
+## Installation & Documentation
+
+See: https://github.com/vrieraba/productivity-tool/wiki
 
 ## Releases
-- **v1.0.1**
-    - Fix: Only take into account task from employees
-    - Fix: Generic team name in graphs
-    - Included jacoco coverage until 99%
-- **v1.0.0**
-    - First stable release
+
+https://github.com/betaflight/betaflight/releases
+
 
