@@ -1,4 +1,4 @@
-# Productivity Tool
+![ProductivityTool](https://github.com/vrieraba/productivity-tool/blob/master/logo.PNG)
 
 Productivity tool provides you with interactive graphs and useful information, letting you easily follow and monitor the performance of your team.
 
@@ -7,7 +7,7 @@ Productivity tool provides you with interactive graphs and useful information, l
 | Date  | Event |
 | - | - |
 | 19 September 2018 | First beta launched 1.0.0 |
-| 26 September 2018 | B2B team started the kick off |
+| 26 September 2018 | B2B team joined |
 
 ## Features
 
