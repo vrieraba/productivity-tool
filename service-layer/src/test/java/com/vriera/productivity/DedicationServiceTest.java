@@ -116,4 +116,37 @@ public class DedicationServiceTest {
         Assert.assertEquals(actual.get(TaskSubType.CODIFICACION).get(Month.JULIO), 0.0);
     }
 
+    @Test
+    public void testCalculateDedicationByMonthAndTaskSubTypeWithoutEmployee() {
+        //Given
+        Employee employee = null;
+
+        Mockito.when(petitionService.getMonthsWithPetitions()).thenReturn(Arrays.asList(Month.JULIO, Month.AGOSTO));
+
+        Petition julyPetition = Mockito.mock(Petition.class);
+        Mockito.when(petitionService.getBy(Month.JULIO)).thenReturn(Collections.singletonList(julyPetition));
+        Petition augustPetition = Mockito.mock(Petition.class);
+        Mockito.when(petitionService.getBy(Month.AGOSTO)).thenReturn(Collections.singletonList(augustPetition));
+
+        Task julyAnalysisTask = Mockito.mock(Task.class);
+        Mockito.when(julyAnalysisTask.getTimeReported()).thenReturn(2);
+        Mockito.when(taskService.getBy(employee, julyPetition, TaskSubType.ANALISIS)).thenReturn(Collections.singletonList(julyAnalysisTask));
+        Task augustAnalysisTask = Mockito.mock(Task.class);
+        Mockito.when(augustAnalysisTask.getTimeReported()).thenReturn(5);
+        Mockito.when(taskService.getBy(employee, augustPetition, TaskSubType.ANALISIS)).thenReturn(Collections.singletonList(augustAnalysisTask));
+
+        Employee employee1 = Mockito.mock(Employee.class);
+        Employee employee2 = Mockito.mock(Employee.class);
+        Mockito.when(employeeService.getAll()).thenReturn(Arrays.asList(employee1, employee2));
+
+        //When
+        Map<TaskSubType, Map<Month, Double>> actual = dedicationService.calculateDedicationByMonthAndTaskSubType(employee);
+
+        //Then
+        Assert.assertEquals(actual.get(TaskSubType.ANALISIS).get(Month.JULIO), 1.0);
+        Assert.assertEquals(actual.get(TaskSubType.ANALISIS).get(Month.AGOSTO), 2.5);
+        Assert.assertNull(actual.get(TaskSubType.ANALISIS).get(Month.SEPTIEMBRE));
+        Assert.assertEquals(actual.get(TaskSubType.CODIFICACION).get(Month.JULIO), 0.0);
+    }
+
 }

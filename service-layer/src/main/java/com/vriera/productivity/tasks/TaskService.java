@@ -1,8 +1,10 @@
 package com.vriera.productivity.tasks;
 
 import com.vriera.productivity.employees.Employee;
+import com.vriera.productivity.employees.EmployeeService;
 import com.vriera.productivity.petitions.Petition;
 import com.vriera.productivity.utils.ExcelUtils;
+import com.vriera.productivity.utils.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,19 +12,30 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @Service
 public class TaskService {
 
-    @Autowired
-    private ExcelUtils excelUtils;
-    @Autowired
-    private TaskStore taskStore;
+    private final TaskStore taskStore;
+    private final ExcelUtils excelUtils;
+    private final FileUtils fileUtils;
+    private final EmployeeService employeeService;
 
-    public void loadFromFile(Petition petition, String fileName) throws IOException {
-        List<Map<String, String>> rows = excelUtils.readFile(Files.newInputStream(Paths.get("/mnt/ProductivityToolData/" + fileName)));
+    @Autowired
+    public TaskService(TaskStore taskStore, ExcelUtils excelUtils, FileUtils fileUtils, EmployeeService employeeService) {
+        this.taskStore = taskStore;
+        this.excelUtils = excelUtils;
+        this.fileUtils = fileUtils;
+        this.employeeService = employeeService;
+    }
+
+    public List<Task> loadFromFile(Petition petition, String fileName) throws IOException {
+        List<Task> tasks = new ArrayList<>();
+
+        List<Map<String, String>> rows = excelUtils.readFile(fileUtils.getInputSteam(fileName));
         for (Map<String, String> row : rows) {
             if (matchInsertConditions(row)) {
                 TaskBuilder builder = new TaskBuilder();
@@ -32,13 +45,16 @@ public class TaskService {
                 builder.taskSubType(TaskSubType.valueOf(row.get("Subtipo")));
                 builder.estimated(Integer.valueOf(row.get("Esfuerzo")));
                 builder.reported(Integer.valueOf(row.get("Incurrido")));
-                taskStore.insert(builder.build());
+                Task task = builder.build();
+                tasks.add(task);
+                taskStore.insert(task);
             }
         }
+        return tasks;
     }
 
-    private boolean matchInsertConditions(Map<String, String> row) {
-        return StringUtils.isNotEmpty(row.get("Responsable")) && !"125601".equals(row.get("Responsable")) && !TaskType.CORRECCION_INCIDENCIA.equals(TaskType.findByDisplayText(row.get("Tipo")));
+    private boolean matchInsertConditions (Map<String, String> row) {
+        return StringUtils.isNotEmpty(row.get("Responsable")) && !TaskType.CORRECCION_INCIDENCIA.equals(TaskType.findByDisplayText(row.get("Tipo"))) && employeeService.getBy(Integer.valueOf(row.get("Responsable"))) != null;
     }
 
     public void deleteAll() {
@@ -59,9 +75,5 @@ public class TaskService {
 
     public List<Task> getBy(Employee employee, Petition petition, TaskSubType taskSubType) {
         return taskStore.getTaskBy(employee, petition, taskSubType);
-    }
-
-    public List<Task> getBy(TaskFilter taskFilter) {
-        return taskStore.getTaskBy(taskFilter);
     }
 }

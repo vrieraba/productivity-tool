@@ -2,7 +2,7 @@ function getProductivityReport(dataTargetDestination, callbackFunction, reportFi
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: "/report/productivity",
+        url: "/productivity-report/",
         data: {
             employeeId : reportFilter.employeeId,
             serviceType : reportFilter.serviceType
@@ -32,7 +32,7 @@ function getDedicationReport(dataTargetDestination, callbackFunction, reportFilt
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: "/report/dedication",
+        url: "/dedication-report/",
         data: {
             employeeId : reportFilter.employeeId
         },
@@ -61,7 +61,7 @@ function getEfficiencyReport(dataTargetDestination, callbackFunction, reportFilt
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: "/report/efficiency",
+        url: "/efficiency-report/",
         data: {
             employeeId : reportFilter.employeeId
         },
@@ -90,7 +90,7 @@ function getLeadTimeReport(dataTargetDestination, callbackFunction, reportFilter
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: "/report/leadTime",
+        url: "/lead-time-report/",
         data: {
             employeeId : reportFilter.employeeId
         },

@@ -15,9 +15,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>${parent.groupId}</groupId>
+            <groupId>${project.parent.groupId}</groupId>
             <artifactId>store-layer</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
@@ -40,5 +40,4 @@
             <version>2.8.5</version>
         </dependency>
     </dependencies>
-
 </project>

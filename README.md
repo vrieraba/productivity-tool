@@ -3,11 +3,11 @@
 ## Run Project in docker
 - Only run
 ```
-docker run -v c:/Users/your_user/ProductivityToolData:/mnt/ProductivityToolData -p 8080:8080 -t vriera/productivity-tool
+docker run -v c:/Users/your_user/ProductivityToolData:/mnt/ProductivityToolData -p 8080:8080 -t victor85/productivity-tool
 ```
 - With debug
 ```
-docker run -v c:/Users/your_user/ProductivityToolData:/mnt/ProductivityToolData -e "JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=n" -p 8080:8080 -p 5005:5005 -t vriera/productivity-tool
+docker run -v c:/Users/your_user/ProductivityToolData:/mnt/ProductivityToolData -e "JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=n" -p 8080:8080 -p 5005:5005 -t victor85/productivity-tool
 ```
 
 ## Useful docker commands
@@ -29,6 +29,10 @@ docker load -i C:\Users\vrieraba\Desktop\productivity-tool-1.0.0.tar
 ```
 
 ## Releases
+- **v1.0.1**
+    - Fix: Only take into account task from employees
+    - Fix: Generic team name in graphs
+    - Included jacoco coverage until 99%
 - **v1.0.0**
     - First stable release
 

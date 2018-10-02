@@ -4,35 +4,37 @@ $("#navbar_home").click(function (event) {
     collapseSideBar();
 });
 
-$("#navbar_dedication").click(function (event) {
+$("#navbar_report_dedication").click(function (event) {
     $(".content_section").hide();
     $("#dedication_section").show();
     collapseSideBar();
 });
 
-$("#navbar_productivity").click(function (event) {
+$("#navbar_report_productivity").click(function (event) {
     $(".content_section").hide();
     $("#productivity_section").show();
     collapseSideBar();
 });
 
-$("#navbar_efficiency").click(function (event) {
+$("#navbar_report_efficiency").click(function (event) {
     $(".content_section").hide();
     $("#efficiency_section").show();
     collapseSideBar();
 });
 
-$("#navbar_data").click(function (event) {
+$("#navbar_report_lead_time").click(function (event) {
+    $(".content_section").hide();
+    $("#lead_time_section").show();
+    collapseSideBar();
+});
+
+$("#navbar_data_summary").click(function (event) {
     $(".content_section").hide();
     $("#data_section").show();
     collapseSideBar();
 });
 
-$("#navbar_lead_time").click(function (event) {
-    $(".content_section").hide();
-    $("#lead_time_section").show();
-    collapseSideBar();
-});
+
 
 function expandSideBar() {
     $('#sidebar').addClass('active');

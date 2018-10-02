@@ -41,29 +41,4 @@ public class PetitionStore {
         }
         return months;
     }
-
-
-    public List<Petition> getBy(PetitionFilter petitionFilter) {
-        List<Petition> allPetitions = getAll();
-        List<Petition> targetPetitions = new ArrayList<Petition>();
-        for (Petition petition : allPetitions) {
-            boolean matchFilters = true;
-            if (petitionFilter.getMonths() != null) {
-                boolean isPetitionInMonths = false;
-                for (Month month : petitionFilter.getMonths()) {
-                    if (petition.getMonth().equals(month)) {
-                        isPetitionInMonths = true;
-                    }
-                }
-                if(!isPetitionInMonths) {
-                    matchFilters = false;
-                }
-            }
-            if (matchFilters) {
-                targetPetitions.add(petition);
-            }
-        }
-        return targetPetitions;
-    }
-
 }

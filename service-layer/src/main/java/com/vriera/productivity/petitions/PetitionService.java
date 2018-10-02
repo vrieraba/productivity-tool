@@ -11,15 +11,19 @@ import java.util.List;
 @Service
 public class PetitionService {
 
-    @Autowired
-    private PetitionStore petitionStore;
+    private final PetitionStore petitionStore;
 
-    public Petition loadFromFile(String fileName) throws IOException {
+    @Autowired
+    public PetitionService(PetitionStore petitionStore) {
+        this.petitionStore = petitionStore;
+    }
+
+    public Petition loadFromFile(String fileName) {
         String[] petitionInfo = fileName.split("\\.")[0].split("_");
         PetitionBuilder builder = new PetitionBuilder();
-        builder.id(Integer.valueOf(petitionInfo[0]));
-        builder.petitionType(PetitionType.valueOf(petitionInfo[1]));
-        builder.month(Month.valueOf(petitionInfo[2]));
+        builder.id(Integer.valueOf(petitionInfo[1]));
+        builder.petitionType(PetitionType.valueOf(petitionInfo[2]));
+        builder.month(Month.valueOf(petitionInfo[3]));
 
         Petition petition = builder.build();
         return petition;
@@ -49,10 +53,6 @@ public class PetitionService {
             petitions.addAll(petitionStore.getBy(month));
         }
         return petitions;
-    }
-
-    public List<Petition> getBy(PetitionFilter petitionFilter) {
-        return petitionStore.getBy(petitionFilter);
     }
 
     public List<Month> getMonthsWithPetitions() {

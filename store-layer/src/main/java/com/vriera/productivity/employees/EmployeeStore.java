@@ -17,17 +17,17 @@ public class EmployeeStore {
         Cache.employees.add(employee);
     }
 
-    public List<Employee> getEmployees() {
+    public List<Employee> getAll() {
         return new ArrayList<Employee>(Cache.employees);
     }
 
     public Employee getEmployeeById(Integer id) {
-        List<Employee> employees = getEmployees();
+        List<Employee> employees = getAll();
         for (Employee employee : employees) {
             if (employee.getId().equals(id)) {
                 return employee;
             }
         }
-        throw new IllegalArgumentException("Could not found employees for id " + id);
+        return null;
     }
 }

@@ -7,7 +7,6 @@ import com.vriera.productivity.petitions.PetitionService;
 import com.vriera.productivity.tasks.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,34 +15,38 @@ import java.util.List;
 @Component
 public class DataBaseUtils {
 
-    @Autowired
-    JsonSerializer jsonSerializer;
-    @Autowired
-    EmployeeService employeeService;
-    @Autowired
-    PetitionService petitionService;
-    @Autowired
-    TaskService taskService;
+    private final FileUtils fileUtils;
+    private final EmployeeService employeeService;
+    private final PetitionService petitionService;
+    private final TaskService taskService;
 
-    public void cleanDB() throws IOException {
+    @Autowired
+    public DataBaseUtils(FileUtils fileUtils, EmployeeService employeeService, PetitionService petitionService, TaskService taskService) {
+        this.fileUtils = fileUtils;
+        this.employeeService = employeeService;
+        this.petitionService = petitionService;
+        this.taskService = taskService;
+    }
+
+    public void cleanDB() {
         employeeService.deleteAll();
         petitionService.deleteAll();
         taskService.deleteAll();
     }
 
     public void loadDB() throws IOException {
-        System.out.println("Loading DataBase...");
+        System.out.println("INFO: Loading DataBase...");
 
         uploadEmployeesFile("EMPLEADOS.xlsx");
 
-        for (File file : new File("/mnt/ProductivityToolData/").listFiles()) {
+        for (File file : fileUtils.getFiles()) {
             if (file.getName().contains("PETICION_")) {
                 uploadPetitionFile(file.getName());
             }
         }
-        System.out.println("Load complete!");
-        System.out.println(petitionService.getAll().size() + " petitions loaded!");
-        System.out.println(taskService.getAll().size() + " tasks loaded!");
+        System.out.println("INFO: Load complete!");
+        System.out.println("INFO: " + petitionService.getAll().size() + " petitions loaded!");
+        System.out.println("INFO: " + taskService.getAll().size() + " tasks loaded!");
     }
 
     private void uploadPetitionFile(String filename) throws IOException {

@@ -34,42 +34,4 @@ public class TaskStore {
         }
         return tasks;
     }
-
-    public List<Task> getTaskBy(TaskFilter taskFilter) {
-        List<Task> allTasks = getAll();
-        List<Task> targetTasks = new ArrayList<Task>();
-        for (Task task : allTasks) {
-            boolean matchFilters = true;
-            if (taskFilter.getEmployee() != null && !task.getEmployeeId().equals(taskFilter.getEmployee().getId())) {
-                matchFilters = false;
-            }
-            if (matchFilters && taskFilter.getTaskSubTypes() != null) {
-                boolean isTaskInSubTypes = false;
-                for (TaskSubType taskSubType : taskFilter.getTaskSubTypes()) {
-                    if (task.getTaskSubType().equals(taskSubType)) {
-                        isTaskInSubTypes = true;
-                    }
-                }
-                if(!isTaskInSubTypes) {
-                    matchFilters = false;
-                }
-            }
-            if (matchFilters && taskFilter.getPetitions() != null) {
-                boolean isTaskInPetitions = false;
-                for (Petition petition : taskFilter.getPetitions()) {
-                    if (task.getPetitionId().equals(petition.getId())) {
-                        isTaskInPetitions = true;
-                    }
-                }
-                if(!isTaskInPetitions) {
-                    matchFilters = false;
-                }
-            }
-            if (matchFilters) {
-                targetTasks.add(task);
-            }
-        }
-        return targetTasks;
-    }
-
 }
