@@ -24,6 +24,6 @@ See: https://github.com/vrieraba/productivity-tool/wiki
 
 ## Releases
 
-https://github.com/betaflight/betaflight/releases
+https://github.com/vrieraba/productivity-tool/releases
 
 
