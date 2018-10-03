@@ -6,5 +6,7 @@ public enum TaskSubType {
     CODIFICACION,
     DESPLIEGUE,
     GESTION,
-    CONSULTA
+    CONSULTA,
+    REVISION,
+    CORRECCION
 }

@@ -19,7 +19,7 @@ import java.util.Map;
 @Service
 public class EfficiencyService {
 
-    private static final List<TaskSubType> EFFECTIVE_TASK_SUB_TYPES = Arrays.asList(TaskSubType.ANALISIS, TaskSubType.CODIFICACION, TaskSubType.PRUEBA, TaskSubType.DESPLIEGUE, TaskSubType.CONSULTA);
+    private static final List<TaskSubType> EFFECTIVE_TASK_SUB_TYPES = Arrays.asList(TaskSubType.ANALISIS, TaskSubType.CODIFICACION, TaskSubType.CORRECCION, TaskSubType.REVISION, TaskSubType.PRUEBA, TaskSubType.DESPLIEGUE, TaskSubType.CONSULTA);
 
     private final PetitionService petitionService;
     private final TaskService taskService;
