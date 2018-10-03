@@ -15,7 +15,7 @@ import java.util.Map;
 @Service
 public class LeadTimeService {
 
-    private static List<TaskSubType> LEAD_TIME_TASK_SUB_TYPES = Arrays.asList(TaskSubType.ANALISIS, TaskSubType.CODIFICACION, TaskSubType.CORRECCION, TaskSubType.REVISION, TaskSubType.PRUEBA, TaskSubType.DESPLIEGUE);
+    private static List<TaskSubType> LEAD_TIME_TASK_SUB_TYPES = Arrays.asList(TaskSubType.ANALISIS, TaskSubType.CODIFICACION, TaskSubType.CORRECCION, TaskSubType.PRUEBA, TaskSubType.DESPLIEGUE);
     private static Integer PERCENTILE = 85;
 
     private final LeadTimeServiceCalculationHelper calculationHelper;

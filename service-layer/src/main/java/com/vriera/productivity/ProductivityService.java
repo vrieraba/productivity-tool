@@ -24,7 +24,7 @@ public class ProductivityService {
     private static final EnumMap<TaskType, List<TaskSubType>> PRODUCTIVE_TASK_SUB_TYPES_BY_TASK_TYPE;
     static {
         PRODUCTIVE_TASK_SUB_TYPES_BY_TASK_TYPE = new EnumMap<>(TaskType.class);
-        PRODUCTIVE_TASK_SUB_TYPES_BY_TASK_TYPE.put(TaskType.EVOLUTIVO, Arrays.asList(TaskSubType.ANALISIS, TaskSubType.CODIFICACION, TaskSubType.CORRECCION, TaskSubType.REVISION, TaskSubType.PRUEBA, TaskSubType.DESPLIEGUE));
+        PRODUCTIVE_TASK_SUB_TYPES_BY_TASK_TYPE.put(TaskType.EVOLUTIVO, Arrays.asList(TaskSubType.ANALISIS, TaskSubType.CODIFICACION, TaskSubType.CORRECCION, TaskSubType.PRUEBA, TaskSubType.DESPLIEGUE));
         PRODUCTIVE_TASK_SUB_TYPES_BY_TASK_TYPE.put(TaskType.SOPORTE, Arrays.asList(TaskSubType.CONSULTA));
     }
 

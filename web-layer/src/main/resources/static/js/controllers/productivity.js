@@ -9,7 +9,9 @@ $("#loadProductivityReport").click(function() {
     let employeeId = $('#productivity_select_employee').val();
     let serviceType = $('input[name=productivity_service_type]:checked').val();
 
-    if (employeeId == 0) {
+    if (employeeId == -1) {
+        //Do not show employees
+    } else if (employeeId == -2) {
         window["employees"].forEach(function(employee) {
             let reportFilter = new ReportFilter(serviceType, employee.id);
             getProductivityReport("employeesProductivityReports", printProductivityReport, reportFilter);

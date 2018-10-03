@@ -8,7 +8,9 @@ $("#loadEfficiencyReport").click(function() {
 
     let employeeId = $('#efficiency_select_employee').val();
 
-    if (employeeId == 0) {
+    if (employeeId == -1) {
+        //Do not show employees
+    } else if (employeeId == -2) {
         window["employees"].forEach(function(employee) {
             let reportFilter = new ReportFilter(null, employee.id);
             getEfficiencyReport("employeesEfficiencyReports", printEfficiencyReport, reportFilter);
