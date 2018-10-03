@@ -6,6 +6,7 @@ import com.vriera.productivity.petitions.PetitionService;
 import com.vriera.productivity.tasks.Task;
 import com.vriera.productivity.tasks.TaskService;
 import com.vriera.productivity.tasks.TaskSubType;
+import com.vriera.productivity.utils.MathUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,19 +20,21 @@ import java.util.Map;
 @Service
 public class EfficiencyService {
 
-    private static final List<TaskSubType> EFFECTIVE_TASK_SUB_TYPES = Arrays.asList(TaskSubType.ANALISIS, TaskSubType.CODIFICACION, TaskSubType.CORRECCION, TaskSubType.REVISION, TaskSubType.PRUEBA, TaskSubType.DESPLIEGUE, TaskSubType.CONSULTA);
+    static final List<TaskSubType> EFFECTIVE_TASK_SUB_TYPES = Arrays.asList(TaskSubType.ANALISIS, TaskSubType.CODIFICACION, TaskSubType.CORRECCION, TaskSubType.REVISION, TaskSubType.PRUEBA, TaskSubType.DESPLIEGUE, TaskSubType.CONSULTA);
 
     private final PetitionService petitionService;
     private final TaskService taskService;
+    private final MathUtils mathUtils;
 
     @Autowired
-    public EfficiencyService(PetitionService petitionService, TaskService taskService) {
+    public EfficiencyService(PetitionService petitionService, TaskService taskService, MathUtils mathUtils) {
         this.petitionService = petitionService;
         this.taskService = taskService;
+        this.mathUtils = mathUtils;
     }
 
     public double calculateGlobalEfficiency(Employee employee) {
-        return calculateEfficiency(taskService.getBy(employee));
+        return mathUtils.calculateEfficiency(taskService.getBy(employee), EFFECTIVE_TASK_SUB_TYPES);
     }
 
 
@@ -42,24 +45,8 @@ public class EfficiencyService {
             for (Petition petition : petitionService.getBy(month)) {
                 tasks.addAll(taskService.getBy(employee, petition));
             }
-            efficiencyByMonth.put(month, calculateEfficiency(tasks));
+            efficiencyByMonth.put(month, mathUtils.calculateEfficiency(tasks, EFFECTIVE_TASK_SUB_TYPES));
         }
         return efficiencyByMonth;
-    }
-
-
-    private double calculateEfficiency(List<Task> tasks) {
-        double effectiveTimeReported = 0;
-        for (Task task : tasks) {
-            if (EFFECTIVE_TASK_SUB_TYPES.contains(task.getTaskSubType())) {
-                effectiveTimeReported += task.getTimeReported();
-            }
-        }
-        double totalTimeReported = 0;
-        for (Task task : tasks) {
-            totalTimeReported += task.getTimeReported();
-        }
-        double efficiency = (effectiveTimeReported / totalTimeReported) * 100.0;
-        return new BigDecimal(efficiency).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 }

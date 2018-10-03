@@ -53,7 +53,7 @@ public class TaskServiceTest {
         map.put("Responsable", "12345");
         map.put("Tipo", "Evolutivo (ENP)");
         map.put("Subtipo", "CODIFICACION");
-        map.put("Esfuerzo", "5");
+        map.put("Esfuerzo", "5.5");
         map.put("Incurrido", "6");
         Mockito.when(excelUtils.readFile(inputStream)).thenReturn(Collections.singletonList(map));
 
@@ -69,8 +69,8 @@ public class TaskServiceTest {
         Assert.assertEquals(actual.get(0).getEmployeeId(), (Integer) 12345);
         Assert.assertEquals(actual.get(0).getTaskType(), TaskType.EVOLUTIVO);
         Assert.assertEquals(actual.get(0).getTaskSubType(), TaskSubType.CODIFICACION);
-        Assert.assertEquals(actual.get(0).getTimeEstimated(), (Integer) 5);
-        Assert.assertEquals(actual.get(0).getTimeReported(), (Integer) 6);
+        Assert.assertEquals(actual.get(0).getTimeEstimated(), 5.5);
+        Assert.assertEquals(actual.get(0).getTimeReported(), 6.0);
     }
 
     @Test

@@ -7,6 +7,7 @@ import com.vriera.productivity.tasks.Task;
 import com.vriera.productivity.tasks.TaskService;
 import com.vriera.productivity.tasks.TaskSubType;
 import com.vriera.productivity.tasks.TaskType;
+import com.vriera.productivity.utils.MathUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,11 +31,13 @@ public class ProductivityService {
 
     private final PetitionService petitionService;
     private final TaskService taskService;
+    private final MathUtils mathUtils;
 
     @Autowired
-    public ProductivityService(PetitionService petitionService, TaskService taskService) {
+    public ProductivityService(PetitionService petitionService, TaskService taskService, MathUtils mathUtils) {
         this.petitionService = petitionService;
         this.taskService = taskService;
+        this.mathUtils = mathUtils;
     }
 
     public double calculateGlobalProductivity(Employee employee, TaskType taskType) {
@@ -44,7 +47,7 @@ public class ProductivityService {
                 tasks.addAll(taskService.getBy(employee, petition, taskSubType));
             }
         }
-        return calculateProductivity(tasks);
+        return mathUtils.calculateProductivity(tasks);
     }
 
     public Map<Month, Double> calculateProductivityByMonth(Employee employee, TaskType taskType) {
@@ -57,7 +60,7 @@ public class ProductivityService {
                     tasks.addAll(taskService.getBy(employee, petition, taskSubType));
                 }
             }
-            productivityByMonth.put(month, calculateProductivity(tasks));
+            productivityByMonth.put(month, mathUtils.calculateProductivity(tasks));
         }
         return productivityByMonth;
     }
@@ -73,25 +76,10 @@ public class ProductivityService {
                 for (Petition petition : petitionService.getBy(month)) {
                     tasks.addAll(taskService.getBy(employee, petition, taskSubType));
                 }
-                productivityByMonth.put(month, calculateProductivity(tasks));
+                productivityByMonth.put(month, mathUtils.calculateProductivity(tasks));
             }
             productivityByMonthAndTaskSubType.put(taskSubType, productivityByMonth);
         }
         return productivityByMonthAndTaskSubType;
-    }
-
-
-    private double calculateProductivity(List<Task> tasks) {
-        int numTask = tasks.size();
-        double timeReported = 0;
-        for (Task task : tasks) {
-            timeReported += task.getTimeReported();
-        }
-        if (timeReported > 0) {
-            double productivity = (numTask / timeReported) * 100.0;
-            return new BigDecimal(productivity).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        } else {
-            return 0.00;
-        }
     }
 }

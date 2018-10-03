@@ -6,8 +6,8 @@ public class TaskBuilder {
     private Integer employeeId;
     private TaskType taskType;
     private TaskSubType taskSubType;
-    private Integer estimated;
-    private Integer reported;
+    private Double estimated;
+    private Double reported;
 
     public TaskBuilder petitionId(Integer petitionId) {
         this.petitionId = petitionId;
@@ -29,11 +29,11 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder estimated(Integer estimated) {
+    public TaskBuilder estimated(Double estimated) {
         this.estimated = estimated;
         return this;
     }
-    public TaskBuilder reported(Integer reported) {
+    public TaskBuilder reported(Double reported) {
         this.reported = reported;
         return this;
     }
@@ -54,11 +54,11 @@ public class TaskBuilder {
         return taskSubType;
     }
 
-    public Integer getEstimated() {
+    public Double getEstimated() {
         return estimated;
     }
 
-    public Integer getReported() {
+    public Double getReported() {
         return reported;
     }
 

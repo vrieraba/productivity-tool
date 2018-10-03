@@ -53,6 +53,4 @@ public class LeadTimeService {
         }
         return leadTimeByMonthAndTaskSubType;
     }
-
-
 }

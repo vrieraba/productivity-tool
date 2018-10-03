@@ -6,6 +6,7 @@ import com.vriera.productivity.petitions.PetitionService;
 import com.vriera.productivity.tasks.Task;
 import com.vriera.productivity.tasks.TaskService;
 import com.vriera.productivity.tasks.TaskSubType;
+import com.vriera.productivity.utils.MathUtils;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -23,13 +24,15 @@ public class EfficiencyServiceTest {
     private PetitionService petitionService;
     @Mock
     private TaskService taskService;
+    @Mock
+    private MathUtils mathUtils;
 
     private EfficiencyService efficiencyService;
 
     @BeforeMethod
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        efficiencyService = new EfficiencyService(petitionService, taskService);
+        efficiencyService = new EfficiencyService(petitionService, taskService, mathUtils);
     }
 
     @Test
@@ -39,12 +42,14 @@ public class EfficiencyServiceTest {
 
         Task effectiveTask = Mockito.mock(Task.class);
         Mockito.when(effectiveTask.getTaskSubType()).thenReturn(TaskSubType.CODIFICACION);
-        Mockito.when(effectiveTask.getTimeReported()).thenReturn(5);
+        Mockito.when(effectiveTask.getTimeReported()).thenReturn(5.0);
         Task nonEffectiveTask = Mockito.mock(Task.class);
         Mockito.when(nonEffectiveTask.getTaskSubType()).thenReturn(TaskSubType.GESTION);
-        Mockito.when(nonEffectiveTask.getTimeReported()).thenReturn(3);
+        Mockito.when(nonEffectiveTask.getTimeReported()).thenReturn(3.0);
 
         Mockito.when(taskService.getBy(employee)).thenReturn(Arrays.asList(effectiveTask, nonEffectiveTask));
+
+        Mockito.when(mathUtils.calculateEfficiency(Arrays.asList(effectiveTask, nonEffectiveTask), EfficiencyService.EFFECTIVE_TASK_SUB_TYPES)).thenReturn(62.50);
 
         //When
         double actual = efficiencyService.calculateGlobalEfficiency(employee);
@@ -65,12 +70,14 @@ public class EfficiencyServiceTest {
 
         Task effectiveTask = Mockito.mock(Task.class);
         Mockito.when(effectiveTask.getTaskSubType()).thenReturn(TaskSubType.CODIFICACION);
-        Mockito.when(effectiveTask.getTimeReported()).thenReturn(5);
+        Mockito.when(effectiveTask.getTimeReported()).thenReturn(5.0);
         Task nonEffectiveTask = Mockito.mock(Task.class);
         Mockito.when(nonEffectiveTask.getTaskSubType()).thenReturn(TaskSubType.GESTION);
-        Mockito.when(nonEffectiveTask.getTimeReported()).thenReturn(3);
+        Mockito.when(nonEffectiveTask.getTimeReported()).thenReturn(3.0);
 
         Mockito.when(taskService.getBy(employee, petition)).thenReturn(Arrays.asList(effectiveTask, nonEffectiveTask));
+
+        Mockito.when(mathUtils.calculateEfficiency(Arrays.asList(effectiveTask, nonEffectiveTask), EfficiencyService.EFFECTIVE_TASK_SUB_TYPES)).thenReturn(62.50);
 
         //When
         Map<Month, Double> actual = efficiencyService.calculateEfficiencyByMonth(employee);

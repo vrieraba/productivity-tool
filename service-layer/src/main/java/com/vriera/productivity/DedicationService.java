@@ -1,15 +1,16 @@
 package com.vriera.productivity;
 
 import com.vriera.productivity.employees.Employee;
-import com.vriera.productivity.employees.EmployeeService;
 import com.vriera.productivity.petitions.Petition;
 import com.vriera.productivity.petitions.PetitionService;
 import com.vriera.productivity.tasks.Task;
 import com.vriera.productivity.tasks.TaskService;
 import com.vriera.productivity.tasks.TaskSubType;
+import com.vriera.productivity.utils.MathUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,28 +20,26 @@ public class DedicationService {
 
     private final PetitionService petitionService;
     private final TaskService taskService;
-    private final EmployeeService employeeService;
+    private final MathUtils mathUtils;
 
     @Autowired
-    public DedicationService(PetitionService petitionService, TaskService taskService, EmployeeService employeeService) {
+    public DedicationService(PetitionService petitionService, TaskService taskService, MathUtils mathUtils) {
         this.petitionService = petitionService;
         this.taskService = taskService;
-        this.employeeService = employeeService;
+        this.mathUtils = mathUtils;
     }
 
     public Map<TaskSubType, Double> calculateDedicationByTaskSubType(Employee employee) {
         Map<TaskSubType, Double> dedicationByTaskSubType = new HashMap<>();
 
-        List<Petition> petitions = petitionService.getAll();
         for (TaskSubType taskSubType : TaskSubType.values()) {
-            double dedication = 0.0;
-            for (Petition petition : petitions) {
-                for (Task task : taskService.getBy(employee, petition, taskSubType)) {
-                    dedication += task.getTimeReported();
-                }
+            List<Task> tasks = new ArrayList<>();
+            for (Petition petition : petitionService.getAll()) {
+                tasks.addAll(taskService.getBy(employee, petition, taskSubType));
             }
-            if (employee == null) {
-                dedication = dedication / employeeService.getAll().size();
+            double dedication = mathUtils.calculateDedication(tasks);
+            if (employee == null && !tasks.isEmpty()) {
+                dedication = mathUtils.round(dedication / mathUtils.calculateDifferentEmployees(tasks), 2);
             }
             dedicationByTaskSubType.put(taskSubType, dedication);
         }
@@ -55,16 +54,13 @@ public class DedicationService {
             Map<Month, Double> dedicationByMonth = new HashMap<>();
 
             for (Month month : petitionService.getMonthsWithPetitions()) {
-                List<Petition> petitions = petitionService.getBy(month);
-
-                double dedication = 0.0;
-                for (Petition petition : petitions) {
-                    for (Task task : taskService.getBy(employee, petition, taskSubType)) {
-                        dedication += task.getTimeReported();
-                    }
+                List<Task> tasks = new ArrayList<>();
+                for (Petition petition : petitionService.getBy(month)) {
+                    tasks.addAll(taskService.getBy(employee, petition, taskSubType));
                 }
-                if (employee == null) {
-                    dedication = dedication / employeeService.getAll().size();
+                double dedication = mathUtils.calculateDedication(tasks);
+                if (employee == null && !tasks.isEmpty()) {
+                    dedication = mathUtils.round(dedication / mathUtils.calculateDifferentEmployees(tasks), 2);
                 }
                 dedicationByMonth.put(month, dedication);
             }

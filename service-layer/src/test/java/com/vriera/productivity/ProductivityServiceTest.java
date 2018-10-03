@@ -8,6 +8,7 @@ import com.vriera.productivity.tasks.Task;
 import com.vriera.productivity.tasks.TaskService;
 import com.vriera.productivity.tasks.TaskSubType;
 import com.vriera.productivity.tasks.TaskType;
+import com.vriera.productivity.utils.MathUtils;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -25,13 +26,15 @@ public class ProductivityServiceTest {
     private PetitionService petitionService;
     @Mock
     private TaskService taskService;
+    @Mock
+    private MathUtils mathUtils;
 
     private ProductivityService productivityService;
 
     @BeforeMethod
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        productivityService = new ProductivityService(petitionService, taskService);
+        productivityService = new ProductivityService(petitionService, taskService, mathUtils);
     }
 
     @Test
@@ -44,12 +47,14 @@ public class ProductivityServiceTest {
         Mockito.when(petitionService.getAll()).thenReturn(Collections.singletonList(petition));
 
         Task analysisTask = Mockito.mock(Task.class);
-        Mockito.when(analysisTask.getTimeReported()).thenReturn(5);
+        Mockito.when(analysisTask.getTimeReported()).thenReturn(5.0);
         Mockito.when(taskService.getBy(employee, petition, TaskSubType.ANALISIS)).thenReturn(Collections.singletonList(analysisTask));
 
         Task developmentTask = Mockito.mock(Task.class);
-        Mockito.when(developmentTask.getTimeReported()).thenReturn(1);
+        Mockito.when(developmentTask.getTimeReported()).thenReturn(1.0);
         Mockito.when(taskService.getBy(employee, petition, TaskSubType.CODIFICACION)).thenReturn(Collections.singletonList(developmentTask));
+
+        Mockito.when(mathUtils.calculateProductivity(Arrays.asList(analysisTask, developmentTask))).thenReturn(33.33);
 
         //When
         Double actual = productivityService.calculateGlobalProductivity(employee, taskType);
@@ -72,12 +77,15 @@ public class ProductivityServiceTest {
         Mockito.when(petitionService.getBy(Month.AGOSTO)).thenReturn(Collections.singletonList(augustPetition));
 
         Task julyAnalysisTask = Mockito.mock(Task.class);
-        Mockito.when(julyAnalysisTask.getTimeReported()).thenReturn(5);
+        Mockito.when(julyAnalysisTask.getTimeReported()).thenReturn(5.0);
         Mockito.when(taskService.getBy(employee, julyPetition, TaskSubType.ANALISIS)).thenReturn(Collections.singletonList(julyAnalysisTask));
 
         Task augustAnalysisTask = Mockito.mock(Task.class);
-        Mockito.when(augustAnalysisTask.getTimeReported()).thenReturn(1);
+        Mockito.when(augustAnalysisTask.getTimeReported()).thenReturn(1.0);
         Mockito.when(taskService.getBy(employee, augustPetition, TaskSubType.ANALISIS)).thenReturn(Collections.singletonList(augustAnalysisTask));
+
+        Mockito.when(mathUtils.calculateProductivity(Collections.singletonList(julyAnalysisTask))).thenReturn(20.00);
+        Mockito.when(mathUtils.calculateProductivity(Collections.singletonList(augustAnalysisTask))).thenReturn(100.00);
 
         //When
         Map<Month, Double> actual = productivityService.calculateProductivityByMonth(employee, taskType);
@@ -102,12 +110,15 @@ public class ProductivityServiceTest {
         Mockito.when(petitionService.getBy(Month.AGOSTO)).thenReturn(Collections.singletonList(augustPetition));
 
         Task julyAnalysisTask = Mockito.mock(Task.class);
-        Mockito.when(julyAnalysisTask.getTimeReported()).thenReturn(5);
+        Mockito.when(julyAnalysisTask.getTimeReported()).thenReturn(5.0);
         Mockito.when(taskService.getBy(employee, julyPetition, TaskSubType.ANALISIS)).thenReturn(Collections.singletonList(julyAnalysisTask));
 
         Task augustAnalysisTask = Mockito.mock(Task.class);
-        Mockito.when(augustAnalysisTask.getTimeReported()).thenReturn(1);
+        Mockito.when(augustAnalysisTask.getTimeReported()).thenReturn(1.0);
         Mockito.when(taskService.getBy(employee, augustPetition, TaskSubType.ANALISIS)).thenReturn(Collections.singletonList(augustAnalysisTask));
+
+        Mockito.when(mathUtils.calculateProductivity(Collections.singletonList(julyAnalysisTask))).thenReturn(20.00);
+        Mockito.when(mathUtils.calculateProductivity(Collections.singletonList(augustAnalysisTask))).thenReturn(100.00);
 
         //When
         Map<TaskSubType, Map<Month, Double>> actual = productivityService.calculateProductivityByMonthAndTaskSubType(employee, taskType);

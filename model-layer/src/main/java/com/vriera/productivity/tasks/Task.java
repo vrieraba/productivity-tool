@@ -6,8 +6,8 @@ public class Task {
     private final Integer employeeId;
     private final TaskType taskType;
     private final TaskSubType taskSubType;
-    private final Integer timeEstimated;
-    private final Integer timeReported;
+    private final Double timeEstimated;
+    private final Double timeReported;
 
     Task(TaskBuilder builder) {
         petitionId = builder.getPetitionId();
@@ -34,11 +34,11 @@ public class Task {
         return taskSubType;
     }
 
-    public Integer getTimeEstimated() {
+    public Double getTimeEstimated() {
         return timeEstimated;
     }
 
-    public Integer getTimeReported() {
+    public Double getTimeReported() {
         return timeReported;
     }
 

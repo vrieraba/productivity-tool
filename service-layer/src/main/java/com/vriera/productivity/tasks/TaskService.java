@@ -43,8 +43,8 @@ public class TaskService {
                 builder.employeeId(Integer.valueOf(row.get("Responsable")));
                 builder.taskType(TaskType.findByDisplayText(row.get("Tipo")));
                 builder.taskSubType(TaskSubType.valueOf(row.get("Subtipo")));
-                builder.estimated(Integer.valueOf(row.get("Esfuerzo")));
-                builder.reported(Integer.valueOf(row.get("Incurrido")));
+                builder.estimated(Double.valueOf(row.get("Esfuerzo")));
+                builder.reported(Double.valueOf(row.get("Incurrido")));
                 Task task = builder.build();
                 tasks.add(task);
                 taskStore.insert(task);

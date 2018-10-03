@@ -64,19 +64,19 @@ public class LeadTimeServiceCalculationHelperTest {
     public void calculatePercentile() {
         //Given
         Task task1 = Mockito.mock(Task.class);
-        Mockito.when(task1.getTimeReported()).thenReturn(15);
+        Mockito.when(task1.getTimeReported()).thenReturn(15.0);
         Task task2 = Mockito.mock(Task.class);
-        Mockito.when(task2.getTimeReported()).thenReturn(25);
+        Mockito.when(task2.getTimeReported()).thenReturn(25.5);
         Task task3 = Mockito.mock(Task.class);
-        Mockito.when(task3.getTimeReported()).thenReturn(25);
+        Mockito.when(task3.getTimeReported()).thenReturn(25.5);
         Task task4 = Mockito.mock(Task.class);
-        Mockito.when(task4.getTimeReported()).thenReturn(35);
+        Mockito.when(task4.getTimeReported()).thenReturn(35.0);
         Task task5 = Mockito.mock(Task.class);
-        Mockito.when(task5.getTimeReported()).thenReturn(65);
+        Mockito.when(task5.getTimeReported()).thenReturn(65.5);
         //When
         double actual = leadTimeServiceCalculationHelper.calculatePercentile(Arrays.asList(task1, task2, task3, task4, task5), 85);
         //Then
-        Assert.assertEquals(actual, 47.0);
+        Assert.assertEquals(actual, 47.2);
     }
 
     @Test

@@ -20,11 +20,12 @@ function initProductivityTool() {
 }
 
 function addEmployeesToSelect() {
+    $("select[id$='select_employee']").append($('<option>', {value:-1, text:'(*) Team Average'}));
+    $("select[id$='select_employee']").append($('<option>', {value:-2, text:'(*) Full Team'}));
     $.each(employees, function(i, item) {
         $("select[id$='select_employee']").append($('<option>', {value:item.id, text:item.name}));
     });
-    $("select[id$='select_employee']").append($('<option>', {value:-1, text:'Team Average'}));
-    $("select[id$='select_employee']").append($('<option>', {value:-2, text:'Full Team'}));
+
 }
 
 $(document).ready(function () {

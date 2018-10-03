@@ -34,7 +34,7 @@ public class LeadTimeServiceCalculationHelper {
     }
 
     double calculatePercentile(List<Task> tasks, int percentile) {
-        List<Integer> timesReported = new ArrayList<>();
+        List<Double> timesReported = new ArrayList<>();
         for (Task task : tasks) {
             timesReported.add(task.getTimeReported());
         }
