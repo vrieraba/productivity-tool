@@ -8,6 +8,7 @@ Productivity tool provides you with interactive graphs and useful information, l
 | - | - |
 | 19 September 2018 | First beta launched 1.0.0 |
 | 26 September 2018 | B2B team joined |
+| 03 October 2018 | AliContent team joined |
 
 ## Features
 
