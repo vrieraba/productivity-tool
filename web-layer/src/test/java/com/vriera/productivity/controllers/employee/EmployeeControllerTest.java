@@ -1,6 +1,5 @@
-package com.vriera.productivity;
+package com.vriera.productivity.controllers.employee;
 
-import com.vriera.productivity.controllers.employee.EmployeeController;
 import com.vriera.productivity.employees.Employee;
 import com.vriera.productivity.employees.EmployeeService;
 import org.mockito.Mock;

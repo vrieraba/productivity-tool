@@ -4,6 +4,7 @@ public class TaskBuilder {
 
     private Integer petitionId;
     private Integer employeeId;
+    private String name;
     private TaskType taskType;
     private TaskSubType taskSubType;
     private Double estimated;
@@ -16,6 +17,11 @@ public class TaskBuilder {
 
     public TaskBuilder employeeId(Integer employeeId) {
         this.employeeId = employeeId;
+        return this;
+    }
+
+    public TaskBuilder name(String name) {
+        this.name = name;
         return this;
     }
 
@@ -44,6 +50,10 @@ public class TaskBuilder {
 
     public Integer getEmployeeId() {
         return employeeId;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public TaskType getTaskType() {

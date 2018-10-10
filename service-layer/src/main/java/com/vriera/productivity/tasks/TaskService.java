@@ -41,6 +41,7 @@ public class TaskService {
                 TaskBuilder builder = new TaskBuilder();
                 builder.petitionId(petition.getId());
                 builder.employeeId(Integer.valueOf(row.get("Responsable")));
+                builder.name(String.valueOf(row.get("Nombre")));
                 builder.taskType(TaskType.findByDisplayText(row.get("Tipo")));
                 builder.taskSubType(TaskSubType.valueOf(row.get("Subtipo")));
                 builder.estimated(Double.valueOf(row.get("Esfuerzo")));

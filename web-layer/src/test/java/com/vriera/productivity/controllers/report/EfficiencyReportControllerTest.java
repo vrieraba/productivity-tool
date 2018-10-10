@@ -1,5 +1,7 @@
-package com.vriera.productivity;
+package com.vriera.productivity.controllers.report;
 
+import com.vriera.productivity.EfficiencyService;
+import com.vriera.productivity.Month;
 import com.vriera.productivity.controllers.report.EfficiencyReportController;
 import com.vriera.productivity.employees.Employee;
 import com.vriera.productivity.employees.EmployeeService;

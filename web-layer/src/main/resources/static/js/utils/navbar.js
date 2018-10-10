@@ -34,7 +34,19 @@ $("#navbar_data_summary").click(function (event) {
     collapseSideBar();
 });
 
+$("#navbar_data_team_members").click(function (event) {
+    $(".content_section").hide();
+    $("#team_members_section").show();
+    collapseSideBar();
+    renderTeamMembersView();
+});
 
+$("#navbar_data_tasks").click(function (event) {
+    $(".content_section").hide();
+    $("#tasks_section").show();
+    collapseSideBar();
+    renderTasksView();
+});
 
 function expandSideBar() {
     $('#sidebar').addClass('active');

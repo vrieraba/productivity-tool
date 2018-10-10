@@ -4,6 +4,7 @@ public class Task {
 
     private final Integer petitionId;
     private final Integer employeeId;
+    private final String name;
     private final TaskType taskType;
     private final TaskSubType taskSubType;
     private final Double timeEstimated;
@@ -12,6 +13,7 @@ public class Task {
     Task(TaskBuilder builder) {
         petitionId = builder.getPetitionId();
         employeeId = builder.getEmployeeId();
+        name = builder.getName();
         taskType = builder.getTaskType();
         taskSubType = builder.getTaskSubType();
         timeEstimated = builder.getEstimated();
@@ -24,6 +26,10 @@ public class Task {
 
     public Integer getEmployeeId() {
         return employeeId;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public TaskType getTaskType() {

@@ -51,6 +51,7 @@ public class TaskServiceTest {
 
         Map<String, String> map = new HashMap<>();
         map.put("Responsable", "12345");
+        map.put("Nombre", "Pedro");
         map.put("Tipo", "Evolutivo (ENP)");
         map.put("Subtipo", "CODIFICACION");
         map.put("Esfuerzo", "5.5");
@@ -67,6 +68,7 @@ public class TaskServiceTest {
         Assert.assertEquals(actual.size(), 1);
         Assert.assertEquals(actual.get(0).getPetitionId(), (Integer) 1);
         Assert.assertEquals(actual.get(0).getEmployeeId(), (Integer) 12345);
+        Assert.assertEquals(actual.get(0).getName(), "Pedro");
         Assert.assertEquals(actual.get(0).getTaskType(), TaskType.EVOLUTIVO);
         Assert.assertEquals(actual.get(0).getTaskSubType(), TaskSubType.CODIFICACION);
         Assert.assertEquals(actual.get(0).getTimeEstimated(), 5.5);
