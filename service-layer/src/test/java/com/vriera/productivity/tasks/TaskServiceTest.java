@@ -1,8 +1,10 @@
 package com.vriera.productivity.tasks;
 
+import com.vriera.productivity.Month;
 import com.vriera.productivity.employees.Employee;
 import com.vriera.productivity.employees.EmployeeService;
 import com.vriera.productivity.petitions.Petition;
+import com.vriera.productivity.petitions.PetitionService;
 import com.vriera.productivity.utils.ExcelUtils;
 import com.vriera.productivity.utils.FileUtils;
 import org.mockito.Mock;
@@ -14,6 +16,7 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -30,17 +33,19 @@ public class TaskServiceTest {
     private FileUtils fileUtils;
     @Mock
     private EmployeeService employeeService;
+    @Mock
+    private PetitionService petitionService;
 
     private TaskService taskService;
 
     @BeforeMethod
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        taskService = new TaskService(taskStore, excelUtils, fileUtils, employeeService);
+        taskService = new TaskService(taskStore, excelUtils, fileUtils, employeeService, petitionService);
     }
 
     @Test
-    public void testLoadFromFile() throws IOException {
+    public void testLoadFromFile() throws IOException, ParseException {
         //Given
         Petition petition = Mockito.mock(Petition.class);
         Mockito.when(petition.getId()).thenReturn(1);
@@ -110,6 +115,25 @@ public class TaskServiceTest {
     }
 
     @Test
+    public void testGetByMonth() {
+        //Given
+        Month month = Month.AGOSTO;
+
+        Petition petition = Mockito.mock(Petition.class);
+        Mockito.when(petitionService.getBy(month)).thenReturn(Collections.singletonList(petition));
+
+        Task task = Mockito.mock(Task.class);
+        Mockito.when(taskStore.getTaskBy(null, petition, null)).thenReturn(Collections.singletonList(task));
+
+        //When
+        List<Task> actual = taskService.getBy(month);
+
+        //Then
+        Assert.assertEquals(actual.size(), 1);
+        Assert.assertEquals(actual.get(0), task);
+    }
+
+    @Test
     public void testGetByEmployeeAndPetition() {
         //Given
         Employee employee = Mockito.mock(Employee.class);
@@ -143,4 +167,25 @@ public class TaskServiceTest {
         Assert.assertEquals(actual.size(), 1);
         Assert.assertEquals(actual.get(0), task);
     }
+
+    @Test
+    public void testGetByEmployeeAndMonth() {
+        //Given
+        Employee employee = Mockito.mock(Employee.class);
+        Month month = Month.AGOSTO;
+
+        Petition petition = Mockito.mock(Petition.class);
+        Mockito.when(petitionService.getBy(month)).thenReturn(Collections.singletonList(petition));
+
+        Task task = Mockito.mock(Task.class);
+        Mockito.when(taskStore.getTaskBy(employee, petition, null)).thenReturn(Collections.singletonList(task));
+
+        //When
+        List<Task> actual = taskService.getBy(employee, month);
+
+        //Then
+        Assert.assertEquals(actual.size(), 1);
+        Assert.assertEquals(actual.get(0), task);
+    }
+
 }

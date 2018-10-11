@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Collections;
 
 public class DataBaseUtilsTest {
@@ -46,7 +47,7 @@ public class DataBaseUtilsTest {
     }
 
     @Test
-    public void testLoadDB() throws IOException {
+    public void testLoadDB() throws IOException, ParseException {
         //Given
         Employee employee = Mockito.mock(Employee.class);
         Mockito.when(employeeService.loadFromFile("EMPLEADOS.xlsx")).thenReturn(Collections.singletonList(employee));

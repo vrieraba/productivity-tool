@@ -1,5 +1,6 @@
 package com.vriera.productivity.controllers.tasks;
 
+import com.vriera.productivity.Month;
 import com.vriera.productivity.employees.Employee;
 import com.vriera.productivity.employees.EmployeeService;
 import com.vriera.productivity.tasks.Task;
@@ -25,12 +26,11 @@ public class TaskController {
     }
 
     @GetMapping("/")
-    public List<Task> getTasks(Integer employeeId) {
+    public List<Task> getTasks(Integer employeeId, Month month) {
         Employee employee = null;
         if (employeeId != null) {
             employee = employeeService.getBy(employeeId);
         }
-        return taskService.getBy(employee);
-
+        return taskService.getBy(employee, month);
     }
 }

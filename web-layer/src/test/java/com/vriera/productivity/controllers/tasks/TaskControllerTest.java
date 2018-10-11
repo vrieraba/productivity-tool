@@ -1,5 +1,6 @@
 package com.vriera.productivity.controllers.tasks;
 
+import com.vriera.productivity.Month;
 import com.vriera.productivity.employees.Employee;
 import com.vriera.productivity.employees.EmployeeService;
 import com.vriera.productivity.tasks.Task;
@@ -33,15 +34,16 @@ public class TaskControllerTest {
     public void testGetTasks() {
         //Given
         Integer employeeId = 12345;
+        Month month = Month.AGOSTO;
 
         Employee employee = Mockito.mock(Employee.class);
         Mockito.when(employeeService.getBy(employeeId)).thenReturn(employee);
 
         Task task = Mockito.mock(Task.class);
-        Mockito.when(taskService.getBy(employee)).thenReturn(Collections.singletonList(task));
+        Mockito.when(taskService.getBy(employee, month)).thenReturn(Collections.singletonList(task));
 
         //When
-        List<Task> actual = taskController.getTasks(employeeId);
+        List<Task> actual = taskController.getTasks(employeeId, month);
 
         //Then
         Assert.assertEquals(actual.size(), 1);
@@ -51,18 +53,17 @@ public class TaskControllerTest {
     @Test
     public void testGetTasksWithoutEmployee() {
         //Given
-        Integer employeeId = null;
+        Month month = Month.AGOSTO;
 
         Task task = Mockito.mock(Task.class);
-        Mockito.when(taskService.getBy(null)).thenReturn(Collections.singletonList(task));
+        Mockito.when(taskService.getBy(null, month)).thenReturn(Collections.singletonList(task));
 
         //When
-        List<Task> actual = taskController.getTasks(employeeId);
+        List<Task> actual = taskController.getTasks(null, month);
 
         //Then
         Assert.assertEquals(actual.size(), 1);
         Assert.assertEquals(actual, Collections.singletonList(task));
         Mockito.verifyZeroInteractions(employeeService);
     }
-
 }

@@ -47,5 +47,4 @@ public class Task {
     public Double getTimeReported() {
         return timeReported;
     }
-
 }

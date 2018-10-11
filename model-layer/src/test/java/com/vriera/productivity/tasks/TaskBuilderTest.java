@@ -3,11 +3,15 @@ package com.vriera.productivity.tasks;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Date;
+
 public class TaskBuilderTest {
 
     @Test
     public void testConstruction() {
         //Given
+        Date date = new Date();
+
         TaskBuilder builder = new TaskBuilder();
         builder.petitionId(5);
         builder.employeeId(6);

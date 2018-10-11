@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 @Component
@@ -34,7 +35,7 @@ public class DataBaseUtils {
         taskService.deleteAll();
     }
 
-    public void loadDB() throws IOException {
+    public void loadDB() throws IOException, ParseException {
         System.out.println("INFO: Loading DataBase...");
 
         uploadEmployeesFile("EMPLEADOS.xlsx");
@@ -49,7 +50,7 @@ public class DataBaseUtils {
         System.out.println("INFO: " + taskService.getAll().size() + " tasks loaded!");
     }
 
-    private void uploadPetitionFile(String filename) throws IOException {
+    private void uploadPetitionFile(String filename) throws IOException, ParseException {
         Petition petition = petitionService.loadFromFile(filename);
         petitionService.insert(petition);
         taskService.loadFromFile(petition, filename);

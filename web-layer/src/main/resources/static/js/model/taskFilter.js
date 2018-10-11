@@ -1,5 +1,6 @@
 class TaskFilter {
-    constructor(employeeId) {
+    constructor(employeeId, month) {
         this.employeeId = employeeId;
+        this.month = month;
     }
 }

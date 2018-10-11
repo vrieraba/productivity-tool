@@ -39,6 +39,7 @@ public class TaskBuilder {
         this.estimated = estimated;
         return this;
     }
+
     public TaskBuilder reported(Double reported) {
         this.reported = reported;
         return this;

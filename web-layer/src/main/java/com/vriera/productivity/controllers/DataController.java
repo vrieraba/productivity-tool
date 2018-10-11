@@ -2,6 +2,7 @@ package com.vriera.productivity.controllers;
 
 import com.vriera.productivity.DataSummary;
 import com.vriera.productivity.DataSummaryBuilder;
+import com.vriera.productivity.Month;
 import com.vriera.productivity.employees.EmployeeService;
 import com.vriera.productivity.petitions.PetitionService;
 import com.vriera.productivity.tasks.TaskService;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/")
@@ -35,7 +38,7 @@ public class DataController {
         dataBaseUtils.cleanDB();
         try {
             dataBaseUtils.loadDB();
-        } catch (IOException e) {
+        } catch (IOException | ParseException e) {
             System.out.println("ERROR:" + e.getMessage());
         }
         DataSummaryBuilder builder = new DataSummaryBuilder();
@@ -43,5 +46,10 @@ public class DataController {
         builder.numPetitions(petitionService.getAll().size());
         builder.numTasks(taskService.getAll().size());
         return builder.build();
+    }
+
+    @GetMapping("/months")
+    public List<Month> getMonths() {
+        return petitionService.getMonthsWithPetitions();
     }
 }

@@ -8,5 +8,6 @@ public enum TaskSubType {
     GESTION,
     CONSULTA,
     REVISION,
-    CORRECCION
+    CORRECCION,
+    DOCUMENTACION
 }

@@ -8,6 +8,7 @@ $("#navbar_report_dedication").click(function (event) {
     $(".content_section").hide();
     $("#dedication_section").show();
     collapseSideBar();
+    renderDedicationView();
 });
 
 $("#navbar_report_productivity").click(function (event) {

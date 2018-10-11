@@ -1,4 +1,6 @@
 var employees = [];
+var months = [];
+
 var onGoingAjaxCalls = 0;
 
 function pushAjaxCall() {
@@ -15,6 +17,7 @@ function popAjaxCall() {
 
 function initProductivityTool() {
     getEmployees("employees", addEmployees);
+    months = Object.keys(Month);
 }
 
 function addEmployees() {
@@ -24,23 +27,6 @@ function addEmployees() {
         $("select[id$='select_employee']").append($('<option>', {value:item.id, text:item.name}));
     });
 
-}
-
-function addEmployeesToSelect(input_id, isNoSelection, isTeamAverage, isFullTeam) {
-    let selectInput = $("select[id=" + input_id + "]");
-    selectInput.children('option').remove();
-    if (isNoSelection) {
-        selectInput.append($('<option>', {value:null, text:'-'}));
-    }
-    if (isTeamAverage) {
-        selectInput.append($('<option>', {value:-1, text:'(*) Team Average'}));
-    }
-    if (isFullTeam) {
-        selectInput.append($('<option>', {value:-2, text:'(*) Full Team'}));
-    }
-    $.each(employees, function(i, item) {
-        selectInput.append($('<option>', {value:item.id, text:item.name}));
-    });
 }
 
 $(document).ready(function () {

@@ -1,12 +1,22 @@
 var employeesDedicationReports = [];
 var teamDedicationReports = [];
 
-$("#loadDedicationReport").click(function() {
+function renderDedicationView() {
+    renderDedicationFilters();
+}
+
+function renderDedicationFilters() {
+    cleanFilters("dedication_section_filters");
+    addEmployeesFilter("dedication_section_filters", "dedication_select_employee", false, true, true);
+    addButton("dedication_section_filters", "loadDedicationReport", "Generate Report")
+}
+
+$("#dedication_section_filters").on("click", "#loadDedicationReport", function() {
     employeesDedicationReports = [];
     teamDedicationReports = [];
     cleanCharts();
 
-    let employeeId = $('#dedication_select_employee').val();
+    let employeeId = $('#dedication_section_filters').find("#dedication_select_employee").val();
 
     if (employeeId == -1) {
         //Do not show employees

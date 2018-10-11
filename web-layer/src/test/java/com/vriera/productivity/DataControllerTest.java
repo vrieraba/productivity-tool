@@ -15,8 +15,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class DataControllerTest {
 
@@ -38,7 +40,7 @@ public class DataControllerTest {
     }
 
     @Test
-    public void testLoadData() throws IOException {
+    public void testLoadData() throws IOException, ParseException {
         //Given
         Employee employee = Mockito.mock(Employee.class);
         Mockito.when(employeeService.getAll()).thenReturn(Collections.singletonList(employee));
@@ -58,7 +60,7 @@ public class DataControllerTest {
     }
 
     @Test
-    public void testLoadDataWhenExceptionOccurs() throws IOException {
+    public void testLoadDataWhenExceptionOccurs() throws IOException, ParseException {
         //Given
         Mockito.doThrow(new IOException("IOException")).when(dataBaseUtils).loadDB();
 
@@ -74,5 +76,19 @@ public class DataControllerTest {
         Assert.assertEquals(actual.getNumEmployees(), (Integer) 0);
         Assert.assertEquals(actual.getNumPetitions(), (Integer) 0);
         Assert.assertEquals(actual.getNumTasks(), (Integer) 0);
+    }
+
+    @Test
+    public void testGetMonths() {
+        //Given
+        Month month = Month.AGOSTO;
+        Mockito.when(petitionService.getMonthsWithPetitions()).thenReturn(Collections.singletonList(month));
+
+        //When
+        List<Month> actual = dataController.getMonths();
+
+        //Then
+        Assert.assertEquals(actual.size(), 1);
+        Assert.assertEquals(actual, Collections.singletonList(month));
     }
 }
