@@ -25,7 +25,7 @@ public class PetitionStore {
     public List<Petition> getBy(Month month) {
         List<Petition> petitions = new ArrayList<Petition>();
         for (Petition petition : getAll()) {
-            if (petition.getMonth().equals(month)) {
+            if (month == null || month.equals(petition.getMonth())) {
                 petitions.add(petition);
             }
         }

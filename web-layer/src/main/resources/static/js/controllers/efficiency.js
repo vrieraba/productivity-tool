@@ -1,12 +1,22 @@
 var employeesEfficiencyReports = [];
 var teamEfficiencyReports = [];
 
-$("#loadEfficiencyReport").click(function() {
+function renderEfficiencyView() {
+    renderEfficiencyFilters();
+}
+
+function renderEfficiencyFilters() {
+    cleanFilters("efficiency_section_filters");
+    addEmployeesFilter("efficiency_section_filters", "efficiency_select_employee", false, true, true);
+    addButton("efficiency_section_filters", "loadEfficiencyReport", "Generate Report")
+}
+
+$("#efficiency_section_filters").on("click", "#loadEfficiencyReport", function() {
     employeesEfficiencyReports = [];
     teamEfficiencyReports = [];
     cleanCharts();
 
-    let employeeId = $('#efficiency_select_employee').val();
+    let employeeId = getSelectValue("efficiency_section_filters", "efficiency_select_employee");
 
     if (employeeId == -1) {
         //Do not show employees

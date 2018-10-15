@@ -4,7 +4,8 @@ function getTasks(dataTargetDestination, callbackFunction, taskFilter) {
         contentType: "application/json",
         url: "/task/",
         data: {
-            employeeId : taskFilter.employeeId
+            employeeId : taskFilter.employeeId,
+            month: taskFilter.month
         },
         dataType: 'json',
         cache: false,

@@ -39,8 +39,11 @@ public class MathUtils {
         for (Task task : tasks) {
             totalTimeReported += task.getTimeReported();
         }
-        double efficiency = (effectiveTimeReported / totalTimeReported) * 100.0;
-        return round(efficiency, 2);
+        double efficiency = 0.00;
+        if (totalTimeReported > 0.0) {
+            efficiency = round(((effectiveTimeReported / totalTimeReported) * 100.0), 2);
+        }
+        return efficiency;
     }
 
     public double calculateDedication(List<Task> tasks) {

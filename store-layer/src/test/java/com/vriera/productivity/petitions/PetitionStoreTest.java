@@ -80,6 +80,21 @@ public class PetitionStoreTest {
     }
 
     @Test
+    public void testGetByWithoutMonth() {
+        //Given
+        Petition petition = Mockito.mock(Petition.class);
+
+        Cache.petitions.add(petition);
+
+        //When
+        List<Petition> actual = petitionStore.getBy(null);
+
+        //Then
+        Assert.assertEquals(actual.size(), 1);
+        Assert.assertEquals(actual.get(0), petition);
+    }
+
+    @Test
     public void testGetMonthsWithPetitions() {
         //Given
         Petition petition1 = Mockito.mock(Petition.class);

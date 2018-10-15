@@ -15,18 +15,21 @@ $("#navbar_report_productivity").click(function (event) {
     $(".content_section").hide();
     $("#productivity_section").show();
     collapseSideBar();
+    renderProductivityView();
 });
 
 $("#navbar_report_efficiency").click(function (event) {
     $(".content_section").hide();
     $("#efficiency_section").show();
     collapseSideBar();
+    renderEfficiencyView();
 });
 
 $("#navbar_report_lead_time").click(function (event) {
     $(".content_section").hide();
     $("#lead_time_section").show();
     collapseSideBar();
+    renderLeadTimeView();
 });
 
 $("#navbar_data_summary").click(function (event) {

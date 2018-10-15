@@ -16,7 +16,7 @@ $("#dedication_section_filters").on("click", "#loadDedicationReport", function()
     teamDedicationReports = [];
     cleanCharts();
 
-    let employeeId = $('#dedication_section_filters').find("#dedication_select_employee").val();
+    let employeeId = getSelectValue("dedication_section_filters", "dedication_select_employee");
 
     if (employeeId == -1) {
         //Do not show employees

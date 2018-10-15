@@ -1,13 +1,24 @@
 var employeesProductivityReports = [];
 var teamProductivityReports = [];
 
-$("#loadProductivityReport").click(function() {
+function renderProductivityView() {
+    renderProductivityFilters();
+}
+
+function renderProductivityFilters() {
+    cleanFilters("productivity_section_filters");
+    addEmployeesFilter("productivity_section_filters", "productivity_select_employee", false, true, true);
+    addServiceTypeFilter("productivity_section_filters", "productivity_service_type", false);
+    addButton("productivity_section_filters", "loadProductivityReport", "Generate Report")
+}
+
+$("#productivity_section_filters").on("click", "#loadProductivityReport", function() {
     employeesProductivityReports = [];
     teamProductivityReports = [];
     cleanCharts();
 
-    let employeeId = $('#productivity_select_employee').val();
-    let serviceType = $('input[name=productivity_service_type]:checked').val();
+    let employeeId = getSelectValue("productivity_section_filters", "productivity_select_employee");
+    let serviceType = getSelectValue("productivity_section_filters", "productivity_service_type");
 
     if (employeeId == -1) {
         //Do not show employees

@@ -1,6 +1,5 @@
 package com.vriera.productivity.utils;
 
-import com.vriera.productivity.employees.Employee;
 import com.vriera.productivity.tasks.Task;
 import com.vriera.productivity.tasks.TaskSubType;
 import org.mockito.Mockito;
@@ -71,6 +70,20 @@ public class MathUtilsTest {
 
         //Then
         Assert.assertEquals(actual, 35.48);
+    }
+
+    @Test
+    public void testCalculateEfficiencyWithZeroReported() {
+        //Given
+        Task task1 = Mockito.mock(Task.class);
+        Mockito.when(task1.getTimeReported()).thenReturn(0.0);
+        Mockito.when(task1.getTaskSubType()).thenReturn(TaskSubType.GESTION);
+
+        //When
+        Double actual = mathUtils.calculateEfficiency(Arrays.asList(task1), Collections.singletonList(TaskSubType.CODIFICACION));
+
+        //Then
+        Assert.assertEquals(actual, 0.00);
     }
 
     @Test

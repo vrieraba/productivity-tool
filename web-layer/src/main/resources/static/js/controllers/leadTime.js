@@ -1,12 +1,22 @@
 var employeesLeadTimeReports = [];
 var teamLeadTimeReports = [];
 
-$("#loadLeadTimeReport").click(function() {
+function renderLeadTimeView() {
+    renderLeadTimeFilters();
+}
+
+function renderLeadTimeFilters() {
+    cleanFilters("lead_time_section_filters");
+    addEmployeesFilter("lead_time_section_filters", "lead_time_select_employee", false, true, true);
+    addButton("lead_time_section_filters", "loadLeadTimeReport", "Generate Report")
+}
+
+$("#lead_time_section_filters").on("click", "#loadLeadTimeReport", function() {
     employeesLeadTimeReports = [];
     teamLeadTimeReports = [];
     cleanCharts();
 
-    let employeeId = $('#lead_time_select_employee').val();
+    let employeeId = getSelectValue("lead_time_section_filters", "lead_time_select_employee");
 
     if (employeeId == -1) {
         //Do not show employees

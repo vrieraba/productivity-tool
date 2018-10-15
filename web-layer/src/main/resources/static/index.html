@@ -79,44 +79,7 @@
 
             <!-- Productivity section -->
             <div id="productivity_section" class="content_section container">
-                <div class="filters">
-                    <div class="form-group row">
-                        <label for="productivity_select_employee" class="col-md-2 col-form-label">Employee</label>
-                        <div class="col-md-10">
-                            <select class="form-control" id="productivity_select_employee"></select>
-                        </div>
-                    </div>
-                    <fieldset class="row">
-                        <div class="form-group col-md-6">
-                            <label class="col-form-label col-md-4 pt-0" style="padding-left:0">Service Type</label>
-                            <div class="col-md-8">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="productivity_service_type" id="productivity_service_type1" value="EVOLUTIVO" checked="checked">
-                                    <label class="form-check-label" for="productivity_service_type1">
-                                        Evolutivo
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="productivity_service_type" id="productivity_service_type2" value="CORRECTIVO">
-                                    <label class="form-check-label" for="productivity_service_type2">
-                                        Correctivo
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="productivity_service_type" id="productivity_service_type3" value="SOPORTE">
-                                    <label class="form-check-label" for="productivity_service_type3">
-                                        Soporte
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                    <div class="form-group row" style="text-align: center;">
-                        <div class="col">
-                            <button id="loadProductivityReport" class="btn btn-primary">Generate Report</button>
-                        </div>
-                    </div>
-                </div>
+                <div id="productivity_section_filters" class="filters"></div>
                 <hr/>
                 <h2 style="text-align: center">Productivity Report</h2>
                 <div id="productivity_charts_area" class="charts_area container"></div>
@@ -132,19 +95,7 @@
 
             <!-- Efficiency Section -->
             <div id="efficiency_section" class="content_section container">
-                <div class="filters">
-                    <div class="form-group row">
-                        <label for="efficiency_select_employee" class="col-md-2 col-form-label">Employee</label>
-                        <div class="col-md-10">
-                            <select class="form-control" id="efficiency_select_employee"></select>
-                        </div>
-                    </div>
-                    <div class="form-group row" style="text-align: center;">
-                        <div class="col">
-                            <button id="loadEfficiencyReport" class="btn btn-primary">Generate Report</button>
-                        </div>
-                    </div>
-                </div>
+                <div id="efficiency_section_filters" class="filters"></div>
                 <hr/>
                 <h2 style="text-align: center">Efficiency Report</h2>
                 <div id="efficiency_charts_area" class="charts_area container"></div>
@@ -152,19 +103,7 @@
 
             <!-- Lead Time Section -->
             <div id="lead_time_section" class="content_section container">
-                <div class="filters">
-                    <div class="form-group row">
-                        <label for="lead_time_select_employee" class="col-md-2 col-form-label">Employee</label>
-                        <div class="col-md-10">
-                            <select class="form-control" id="lead_time_select_employee"></select>
-                        </div>
-                    </div>
-                    <div class="form-group row" style="text-align: center;">
-                        <div class="col">
-                            <button id="loadLeadTimeReport" class="btn btn-primary">Generate Report</button>
-                        </div>
-                    </div>
-                </div>
+                <div id="lead_time_section_filters" class="filters"></div>
                 <hr/>
                 <h2 style="text-align: center">Lead Time Report</h2>
                 <div id="lead_time_charts_area" class="charts_area container"></div>
