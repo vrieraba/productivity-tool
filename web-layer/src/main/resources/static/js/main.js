@@ -1,5 +1,6 @@
 var employees = [];
 var months = [];
+var taskSubTypes = [];
 
 var onGoingAjaxCalls = 0;
 
@@ -16,17 +17,9 @@ function popAjaxCall() {
 }
 
 function initProductivityTool() {
-    getEmployees("employees", addEmployees);
-    months = Object.keys(Month);
-}
-
-function addEmployees() {
-    $("select[id$='select_employee']").append($('<option>', {value:-1, text:'(*) Team Average'}));
-    $("select[id$='select_employee']").append($('<option>', {value:-2, text:'(*) Full Team'}));
-    $.each(employees, function(i, item) {
-        $("select[id$='select_employee']").append($('<option>', {value:item.id, text:item.name}));
-    });
-
+    getEmployees("employees", null);
+    getMonths("months", null);
+    getTaskSubTypes("taskSubTypes", null);
 }
 
 $(document).ready(function () {

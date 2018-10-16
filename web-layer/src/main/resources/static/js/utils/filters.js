@@ -2,6 +2,22 @@ function cleanFilters(section_id) {
     $("#" + section_id).empty();
 }
 
+function addTaskSubTypesFilter(section_id, filter_id, isNoSelection) {
+    let sub_wrapper = $('<div class="col-md-10"></div>');
+    let wrapper = $('<div class="form-group row"><label for="' + filter_id +'" class="col-md-2 col-form-label">Sub Type</label></div>');
+    let select = $('<select class="form-control" id="' + filter_id + '"></select>');
+
+    if (isNoSelection) {
+        select.append($('<option>', {value: null, text:'-'}));
+    }
+    $.each(window["taskSubTypes"], function(i, item) {
+        select.append($('<option>', {value: item, text: item}));
+    });
+    sub_wrapper.append(select);
+    wrapper.append(sub_wrapper);
+    $("#" + section_id).append(wrapper);
+}
+
 function addMonthsFilter(section_id, filter_id, isNoSelection) {
     let sub_wrapper = $('<div class="col-md-10"></div>');
     let wrapper = $('<div class="form-group row"><label for="' + filter_id +'" class="col-md-2 col-form-label">Month</label></div>');

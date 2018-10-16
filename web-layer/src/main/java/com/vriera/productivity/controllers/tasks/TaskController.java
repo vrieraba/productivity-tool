@@ -5,6 +5,7 @@ import com.vriera.productivity.employees.Employee;
 import com.vriera.productivity.employees.EmployeeService;
 import com.vriera.productivity.tasks.Task;
 import com.vriera.productivity.tasks.TaskService;
+import com.vriera.productivity.tasks.TaskSubType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,11 +27,11 @@ public class TaskController {
     }
 
     @GetMapping("/")
-    public List<Task> getTasks(Integer employeeId, Month month) {
+    public List<Task> getTasks(Integer employeeId, Month month, TaskSubType taskSubType) {
         Employee employee = null;
         if (employeeId != null) {
             employee = employeeService.getBy(employeeId);
         }
-        return taskService.getBy(employee, month);
+        return taskService.getBy(employee, month, taskSubType);
     }
 }

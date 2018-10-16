@@ -6,6 +6,7 @@ import com.vriera.productivity.Month;
 import com.vriera.productivity.employees.EmployeeService;
 import com.vriera.productivity.petitions.PetitionService;
 import com.vriera.productivity.tasks.TaskService;
+import com.vriera.productivity.tasks.TaskSubType;
 import com.vriera.productivity.utils.DataBaseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -33,7 +35,7 @@ public class DataController {
         this.taskService = taskService;
     }
 
-    @GetMapping("/loadData")
+    @GetMapping("/load-data")
     public DataSummary loadData() {
         dataBaseUtils.cleanDB();
         try {
@@ -51,5 +53,10 @@ public class DataController {
     @GetMapping("/months")
     public List<Month> getMonths() {
         return petitionService.getMonthsWithPetitions();
+    }
+
+    @GetMapping("/task-sub-types")
+    public List<TaskSubType> getTaskSubTypes() {
+        return Arrays.asList(TaskSubType.values());
     }
 }

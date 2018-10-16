@@ -6,6 +6,7 @@ import com.vriera.productivity.employees.EmployeeService;
 import com.vriera.productivity.petitions.PetitionService;
 import com.vriera.productivity.tasks.Task;
 import com.vriera.productivity.tasks.TaskService;
+import com.vriera.productivity.tasks.TaskSubType;
 import com.vriera.productivity.utils.DataBaseUtils;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -90,5 +91,14 @@ public class DataControllerTest {
         //Then
         Assert.assertEquals(actual.size(), 1);
         Assert.assertEquals(actual, Collections.singletonList(month));
+    }
+
+    @Test
+    public void testGetTaskSubTypes() {
+        //When
+        List<TaskSubType> actual = dataController.getTaskSubTypes();
+
+        //Then
+        Assert.assertEquals(actual, Arrays.asList(TaskSubType.values()));
     }
 }

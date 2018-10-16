@@ -169,19 +169,20 @@ public class TaskServiceTest {
     }
 
     @Test
-    public void testGetByEmployeeAndMonth() {
+    public void testGetByEmployeeAndMonthAndTaskSubType() {
         //Given
         Employee employee = Mockito.mock(Employee.class);
         Month month = Month.AGOSTO;
+        TaskSubType taskSubType = TaskSubType.CODIFICACION;
 
         Petition petition = Mockito.mock(Petition.class);
         Mockito.when(petitionService.getBy(month)).thenReturn(Collections.singletonList(petition));
 
         Task task = Mockito.mock(Task.class);
-        Mockito.when(taskStore.getTaskBy(employee, petition, null)).thenReturn(Collections.singletonList(task));
+        Mockito.when(taskStore.getTaskBy(employee, petition, taskSubType)).thenReturn(Collections.singletonList(task));
 
         //When
-        List<Task> actual = taskService.getBy(employee, month);
+        List<Task> actual = taskService.getBy(employee, month, taskSubType);
 
         //Then
         Assert.assertEquals(actual.size(), 1);

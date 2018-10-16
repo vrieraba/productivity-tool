@@ -5,6 +5,7 @@ function getTasks(dataTargetDestination, callbackFunction, taskFilter) {
         url: "/task/",
         data: {
             employeeId : taskFilter.employeeId,
+            taskSubType: taskFilter.taskSubType,
             month: taskFilter.month
         },
         dataType: 'json',

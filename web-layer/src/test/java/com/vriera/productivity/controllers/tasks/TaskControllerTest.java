@@ -5,6 +5,7 @@ import com.vriera.productivity.employees.Employee;
 import com.vriera.productivity.employees.EmployeeService;
 import com.vriera.productivity.tasks.Task;
 import com.vriera.productivity.tasks.TaskService;
+import com.vriera.productivity.tasks.TaskSubType;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -35,15 +36,16 @@ public class TaskControllerTest {
         //Given
         Integer employeeId = 12345;
         Month month = Month.AGOSTO;
+        TaskSubType taskSubType = TaskSubType.CODIFICACION;
 
         Employee employee = Mockito.mock(Employee.class);
         Mockito.when(employeeService.getBy(employeeId)).thenReturn(employee);
 
         Task task = Mockito.mock(Task.class);
-        Mockito.when(taskService.getBy(employee, month)).thenReturn(Collections.singletonList(task));
+        Mockito.when(taskService.getBy(employee, month, taskSubType)).thenReturn(Collections.singletonList(task));
 
         //When
-        List<Task> actual = taskController.getTasks(employeeId, month);
+        List<Task> actual = taskController.getTasks(employeeId, month, taskSubType);
 
         //Then
         Assert.assertEquals(actual.size(), 1);
@@ -54,12 +56,13 @@ public class TaskControllerTest {
     public void testGetTasksWithoutEmployee() {
         //Given
         Month month = Month.AGOSTO;
+        TaskSubType taskSubType = TaskSubType.CODIFICACION;
 
         Task task = Mockito.mock(Task.class);
-        Mockito.when(taskService.getBy(null, month)).thenReturn(Collections.singletonList(task));
+        Mockito.when(taskService.getBy(null, month, taskSubType)).thenReturn(Collections.singletonList(task));
 
         //When
-        List<Task> actual = taskController.getTasks(null, month);
+        List<Task> actual = taskController.getTasks(null, month, taskSubType);
 
         //Then
         Assert.assertEquals(actual.size(), 1);

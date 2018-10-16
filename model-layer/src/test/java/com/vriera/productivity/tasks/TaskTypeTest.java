@@ -10,7 +10,7 @@ public class TaskTypeTest {
     private Object[][] displayTextDataProvider() {
         return new Object[][] {
                 {"Evolutivo (ENP)", TaskType.EVOLUTIVO},
-                {"CORRECTIVO (CNP)", TaskType.CORRECTIVO},
+                {"Correctivo (COR)", TaskType.CORRECTIVO},
                 {"Consulta (CON)", TaskType.SOPORTE},
                 {"Corrección Incidencias", TaskType.CORRECCION_INCIDENCIA}
         };

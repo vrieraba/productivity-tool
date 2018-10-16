@@ -58,7 +58,7 @@ public class TaskService {
     }
 
     private boolean matchInsertConditions (Map<String, String> row) {
-        return StringUtils.isNotEmpty(row.get("Responsable")) && !TaskType.CORRECCION_INCIDENCIA.equals(TaskType.findByDisplayText(row.get("Tipo"))) && employeeService.getBy(Integer.valueOf(row.get("Responsable"))) != null && Double.valueOf(row.get("Incurrido")) > 0.0;
+        return StringUtils.isNotEmpty(row.get("Responsable")) && !TaskType.CORRECCION_INCIDENCIA.equals(TaskType.findByDisplayText(row.get("Tipo"))) && employeeService.getBy(Integer.valueOf(row.get("Responsable"))) != null && row.get("Incurrido") != null && Double.valueOf(row.get("Incurrido")) > 0.0;
     }
 
     public void deleteAll() {
@@ -87,11 +87,11 @@ public class TaskService {
         return taskStore.getTaskBy(employee, petition, null);
     }
 
-    public List<Task> getBy(Employee employee, Month month) {
+    public List<Task> getBy(Employee employee, Month month, TaskSubType taskSubType) {
         List<Task> tasks = new ArrayList<>();
 
         for (Petition petition : petitionService.getBy(month)) {
-            tasks.addAll(taskStore.getTaskBy(employee, petition, null));
+            tasks.addAll(taskStore.getTaskBy(employee, petition, taskSubType));
         }
 
         return tasks;

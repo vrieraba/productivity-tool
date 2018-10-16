@@ -2,7 +2,7 @@ package com.vriera.productivity.tasks;
 
 public enum TaskType {
     EVOLUTIVO("Evolutivo (ENP)"),
-    CORRECTIVO("CORRECTIVO (CNP)"),
+    CORRECTIVO("Correctivo (COR)"),
     SOPORTE("Consulta (CON)"),
     CORRECCION_INCIDENCIA("Corrección Incidencias");
 
